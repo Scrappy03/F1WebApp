@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Drivers - ApexData</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/drivers.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">ApexData</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'drivers' %}">Drivers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Teams</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-title-container">
+        <div class="container">
+            <h1 class="page-title">Formula 1 Drivers</h1>
+            <p class="page-subtitle">Discover the current Formula 1 drivers competing in the championship, their
+                statistics, and achievements.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-4">
+            {% for driver in drivers %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 team-{{ driver.team|lower|cut:" " }}">
+                    {% if driver.profile_image_url %}
+                    <img src="{{ driver.profile_image_url }}" class="card-img-top"
+                        alt="{{ driver.first_name }} {{ driver.last_name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h2 class="card-title">{{ driver.first_name }} {{ driver.last_name }}</h2>
+                        <div class="driver-number">#{{ driver.driver_number }}</div>
+                        <div class="nationality">{{ driver.nationality }}</div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">Points</div>
+                                <div class="stat-value">{{ driver.points }}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Championships</div>
+                                <div class="stat-value">{{ driver.championships_won }}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Race Wins</div>
+                                <div class="stat-value">{{ driver.total_race_wins }}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Team</div>
+                                <div class="stat-value">
+                                    {% for driver_team in driver_teams %}
+                                    {% if driver_team.driver == driver %}
+                                    {{ driver_team.team.team_name }}
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-3 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 ApexData. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

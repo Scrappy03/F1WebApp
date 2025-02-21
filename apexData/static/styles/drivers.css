@@ -1,0 +1,490 @@
+:root {
+    /* Primary colors */
+    --f1-red: #FF1E1E;
+    --f1-red-hover: #FF0000;
+    --dark-gray: #1E1E28;
+    --light-gray: #FFFFFF;
+    --f1-light: #ffffff;
+
+    /* Driver-specific colors */
+    --driver-card-bg: rgba(30, 30, 40, 0.9);
+    --driver-stat-bg: rgba(255, 255, 255, 0.05);
+    --driver-number-color: var(--f1-red);
+    --driver-border: var(--f1-red);
+
+    /* Secondary colors */
+    --f1-text-gray: #CECECE;
+    --f1-overlay: rgba(30, 30, 40, 0.8);
+    --card-bg: rgba(30, 30, 40, 0.95);
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+
+    /* Driver card specific spacing */
+    --driver-card-padding: var(--spacing-md);
+    --driver-image-height: 280px;
+    --driver-name-size: 1.75rem;
+    --driver-number-size: 2.5rem;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.4s ease-in-out;
+    --transition-hover: 0.3s ease-in-out;
+
+    /* Borders */
+    --border-sharp: 4px;
+    --driver-card-radius: 8px;
+
+    /* Shadows */
+    --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+    /* Add team colors */
+    --mercedes-color: #00D2BE;
+    --redbull-color: #0600EF;
+    --ferrari-color: #DC0000;
+    --mclaren-color: #FF8700;
+    --aston-color: #006F62;
+    --alpine-color: #0090FF;
+    --williams-color: #005AFF;
+    --haas-color: #FFFFFF;
+    --alfa-color: #900000;
+    --alphatauri-color: #2B4562;
+
+    /* Add new variables for page title */
+    --title-spacing: 3rem;
+    --title-font-size: 3.5rem;
+    --subtitle-font-size: 1.2rem;
+}
+
+/* Base styles */
+body {
+    font-family: 'Titillium Web', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--dark-gray);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-bottom: 4px solid var(--f1-red);
+    box-shadow: var(--shadow-small);
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--f1-red) !important;
+}
+
+.nav-link {
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    position: relative;
+    padding: var(--spacing-xs) var(--spacing-sm) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: var(--f1-red);
+    transition: var(--transition-normal);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--f1-red) !important;
+}
+
+/* Page Title Styling */
+.page-title-container {
+    text-align: center;
+    padding: var(--title-spacing) 0;
+    position: relative;
+    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(180deg, rgba(30, 30, 40, 0.95) 0%, var(--dark-gray) 100%);
+    border-bottom: 2px solid var(--f1-red);
+}
+
+.page-title {
+    font-size: var(--title-font-size);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--f1-light);
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--f1-red);
+}
+
+.page-subtitle {
+    font-size: var(--subtitle-font-size);
+    color: var(--f1-text-gray);
+    font-weight: 400;
+    max-width: 600px;
+    margin: var(--spacing-md) auto 0;
+}
+
+/* Driver specific styles */
+.driver-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+.driver-card {
+    background: var(--driver-card-bg);
+    border-radius: var(--driver-card-radius);
+    overflow: hidden;
+    transition: transform var(--transition-normal), box-shadow var(--transition-slow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-small);
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+.driver-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.driver-image {
+    width: 100%;
+    height: var(--driver-image-height);
+    object-fit: cover;
+    border-bottom: 2px solid var(--driver-border);
+}
+
+.driver-info {
+    padding: var(--driver-card-padding);
+    position: relative;
+    z-index: 1;
+}
+
+.driver-name {
+    font-size: var(--driver-name-size);
+    font-weight: 700;
+    color: var(--f1-light);
+    margin-bottom: var(--spacing-xs);
+    position: relative;
+    padding-left: var(--spacing-sm);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.driver-number {
+    font-size: var(--driver-number-size);
+    font-weight: 800;
+    color: var(--driver-number-color);
+    opacity: 0.9;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-sharp);
+    display: inline-block;
+    margin-bottom: var(--spacing-xs);
+}
+
+.driver-stats {
+    margin-top: var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.stat-item {
+    background: var(--driver-stat-bg);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-sharp);
+    text-align: center;
+}
+
+.stat-label {
+    color: var(--f1-text-gray);
+    font-size: 0.85rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-value {
+    color: var(--f1-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .driver-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .driver-image {
+        height: 220px;
+    }
+
+    .driver-name {
+        font-size: 1.5rem;
+    }
+
+    .driver-card {
+        margin-bottom: var(--spacing-md);
+    }
+
+    :root {
+        --title-font-size: 2.5rem;
+        --title-spacing: 2rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+        padding: 0 var(--spacing-md);
+    }
+}
+
+@media (max-width: 576px) {
+    :root {
+        --driver-image-height: 180px;
+        --driver-name-size: 1.25rem;
+        --driver-number-size: 2rem;
+    }
+
+    .driver-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .driver-card {
+        margin-bottom: var(--spacing-sm);
+    }
+}
+
+/* F1-inspired card styles */
+.card {
+    background: linear-gradient(145deg, var(--dark-gray), rgba(30, 30, 40, 0.95));
+    border: 1px solid rgba(255, 30, 30, 0.15);
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--f1-red);
+    opacity: 0.9;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    z-index: 2;
+}
+
+/* Add shine effect */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(to right,
+            transparent,
+            rgba(255, 255, 255, 0.03),
+            transparent);
+    transform: skewX(-15deg);
+    transition: all 0.6s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border: 1px solid rgba(255, 30, 30, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(255, 30, 30, 0.2);
+}
+
+.card:hover::after {
+    left: 200%;
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 2px solid rgba(255, 30, 30, 0.2);
+    filter: contrast(1.1) brightness(1.05);
+}
+
+.card-body {
+    background: linear-gradient(180deg,
+            rgba(30, 30, 40, 0.95) 0%,
+            rgba(20, 20, 28, 1) 100%);
+    padding: var(--spacing-md);
+    position: relative;
+    flex: 1;
+}
+
+.card-title {
+    color: var(--f1-light);
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    border-left: 4px solid var(--f1-red);
+    /* Will be overridden by team colors */
+}
+
+.nationality {
+    font-size: 1.1rem;
+    color: var(--f1-text-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 4px solid transparent;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--f1-text-gray);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--f1-light);
+}
+
+/* Team-specific styles */
+.team-mercedes .card-title {
+    border-left-color: var(--mercedes-color);
+}
+
+.team-redbull .card-title {
+    border-left-color: var(--redbull-color);
+}
+
+.team-ferrari .card-title {
+    border-left-color: var(--ferrari-color);
+}
+
+.team-mclaren .card-title {
+    border-left-color: var(--mclaren-color);
+}
+
+.team-astonmartin .card-title {
+    border-left-color: var(--aston-color);
+}
+
+.team-alpine .card-title {
+    border-left-color: var(--alpine-color);
+}
+
+.team-williams .card-title {
+    border-left-color: var(--williams-color);
+}
+
+.team-haas .card-title {
+    border-left-color: var(--haas-color);
+}
+
+.team-alfaromeo .card-title {
+    border-left-color: var(--alfa-color);
+}
+
+.team-alphatauri .card-title {
+    border-left-color: var(--alphatauri-color);
+}
+
+.driver-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--f1-red);
+    color: var(--f1-light);
+    padding: 0.5rem 1.2rem;
+    font-weight: 800;
+    font-size: 1.5rem;
+    clip-path: polygon(12% 0, 100% 0, 100% 70%, 88% 100%, 0 100%, 0 30%);
+    z-index: 3;
+    opacity: 0.95;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-text {
+    color: var(--f1-text-gray);
+    margin-top: 2.5rem;
+    /* Increased margin to give more space below number */
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+/* Remove hover effect on image */
+.card:hover .card-img-top {
+    transform: none;
+}
+
+/* Add this new hover effect */
+.card:hover .card-img-top {
+    transform: none;
+}
