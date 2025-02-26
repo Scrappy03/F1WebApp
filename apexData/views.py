@@ -18,7 +18,11 @@ def drivers(request):
     return render(request, 'drivers.html', context)
 
 def teams(request):
-    return render(request, 'teams.html')
+    teams = Team.objects.all()
+    context = {
+        'teams': teams
+    }
+    return render(request, 'teams.html', context)
 
 def races(request):
     return render(request, 'races.html')

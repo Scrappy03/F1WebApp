@@ -43,47 +43,54 @@
     </div>
 
     <div class="container">
-        <div class="row g-4">
-            {% for driver in drivers %}
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 team-{{ driver.team|lower|cut:" " }}">
-                    {% if driver.profile_image_url %}
-                    <img src="{{ driver.profile_image_url }}" class="card-img-top"
-                        alt="{{ driver.first_name }} {{ driver.last_name }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h2 class="card-title">{{ driver.first_name }} {{ driver.last_name }}</h2>
-                        <div class="driver-number">#{{ driver.driver_number }}</div>
-                        <div class="nationality">{{ driver.nationality }}</div>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-label">Points</div>
-                                <div class="stat-value">{{ driver.points }}</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-label">Championships</div>
-                                <div class="stat-value">{{ driver.championships_won }}</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-label">Race Wins</div>
-                                <div class="stat-value">{{ driver.total_race_wins }}</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-label">Team</div>
-                                <div class="stat-value">
-                                    {% for driver_team in driver_teams %}
-                                    {% if driver_team.driver == driver %}
-                                    {{ driver_team.team.team_name }}
-                                    {% endif %}
-                                    {% endfor %}
+        {% regroup driver_teams by team as team_list %}
+        {% for team in team_list %}
+        <div class="team-section mb-5">
+            <!-- Add this temporarily for debugging -->
+            <div style="display: none">
+                Debug Team Name: {{ team.grouper.team_name }}
+            </div>
+            <h2 class="team-title" data-team="{{ team.grouper.team_name }}">
+                {{ team.grouper.team_name }}
+            </h2>
+            <div class="row g-4">
+                {% for driver_team in team.list %}
+                <div class="col-md-6">
+                    <div class="card h-100" data-team="{{ team.grouper.team_name }}">
+                        {% if driver_team.driver.profile_image_url %}
+                        <img src="{{ driver_team.driver.profile_image_url }}" class="card-img-top"
+                            alt="{{ driver_team.driver.first_name }} {{ driver_team.driver.last_name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h2 class="card-title">{{ driver_team.driver.first_name }} {{ driver_team.driver.last_name}}
+                            </h2>
+                            <div class="driver-number">#{{ driver_team.driver.driver_number }}</div>
+                            <div class="nationality">{{ driver_team.driver.nationality }}</div>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-label">Points</div>
+                                    <div class="stat-value">{{ driver_team.driver.points }}</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Championships</div>
+                                    <div class="stat-value">{{ driver_team.driver.championships_won }}</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Race Wins</div>
+                                    <div class="stat-value">{{ driver_team.driver.total_race_wins }}</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">Podiums</div>
+                                    <div class="stat-value">{{ driver_team.driver.podiums }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 
     <footer class="bg-dark text-light py-3 mt-5">
@@ -93,6 +100,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'scripts/drivers.js' %}"></script>
 </body>
 
 </html>

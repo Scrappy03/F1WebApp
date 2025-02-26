@@ -15,6 +15,7 @@ class Driver(models.Model):
     total_race_wins = models.IntegerField(default=0)
     profile_image_url = models.URLField(validators=[URLValidator()])
     driver_number = models.IntegerField()
+    podiums = models.IntegerField(default=0)
     STATUS_CHOICES = [
         ('active', 'Active'),
         ('inactive', 'Inactive'),

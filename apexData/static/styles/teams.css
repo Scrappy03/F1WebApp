@@ -1,0 +1,176 @@
+/* Inherit base styles */
+@import 'styles.css';
+
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.team-card {
+    background: var(--card-bg);
+    border-radius: var(--border-sharp);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team-card-header {
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-bottom: 3px solid var(--f1-red);
+}
+
+.team-logo {
+    max-width: 80%;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.team-card-body {
+    padding: 1.5rem;
+}
+
+.team-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--f1-light);
+    position: relative;
+    padding-left: 1rem;
+    border-left: 4px solid var(--f1-red);
+}
+
+.team-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: var(--f1-text-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-value {
+    font-size: 1rem;
+    color: var(--f1-light);
+    font-weight: 600;
+}
+
+.team-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.75rem;
+    text-align: center;
+    border-radius: var(--border-sharp);
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--f1-red);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--f1-text-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.team-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--f1-red);
+    color: var(--f1-light);
+    text-decoration: none;
+    border-radius: var(--border-sharp);
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+}
+
+.team-link:hover {
+    background: var(--f1-red-hover);
+    color: var(--f1-light);
+}
+
+/* Team-specific colors */
+[data-team="mercedes"] .team-name {
+    border-left-color: var(--mercedes-color);
+}
+
+[data-team="redbull"] .team-name {
+    border-left-color: var(--redbull-color);
+}
+
+[data-team="ferrari"] .team-name {
+    border-left-color: var(--ferrari-color);
+}
+
+[data-team="mclaren"] .team-name {
+    border-left-color: var(--mclaren-color);
+}
+
+[data-team="astonmartin"] .team-name {
+    border-left-color: var(--aston-color);
+}
+
+[data-team="alpine"] .team-name {
+    border-left-color: var(--alpine-color);
+}
+
+[data-team="williams"] .team-name {
+    border-left-color: var(--williams-color);
+}
+
+[data-team="haas"] .team-name {
+    border-left-color: var(--haas-color);
+}
+
+[data-team="alfaromeo"] .team-name {
+    border-left-color: var(--alfa-color);
+}
+
+[data-team="alphatauri"] .team-name {
+    border-left-color: var(--alphatauri-color);
+}
+
+@media (max-width: 768px) {
+    .teams-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .team-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
