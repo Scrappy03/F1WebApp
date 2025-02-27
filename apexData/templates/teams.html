@@ -42,13 +42,13 @@
         </div>
     </div>
 
-    <main class="container">
+    <main class="container-fluid">
         <div class="teams-grid">
             {% for team in teams %}
             <div class="team-card" data-team="{{ team.team_name|lower|cut:" " }}">
                 <div class="team-card-header">
-                    {% if team.team_logo %}
-                    <img src="{{ team.team_logo.url }}" alt="{{ team.team_name }} logo" class="team-logo">
+                    {% if team.logo_url %}
+                    <img src="{{ team.logo_url }}" alt="{{ team.team_name }} logo" class="team-logo">
                     {% endif %}
                 </div>
                 <div class="team-card-body">
@@ -56,11 +56,11 @@
                     <div class="team-info">
                         <div class="info-item">
                             <span class="info-label">Base</span>
-                            <span class="info-value">{{ team.team_base }}</span>
+                            <span class="info-value">{{ team.base_location }}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Team Principal</span>
-                            <span class="info-value">{{ team.team_principal }}</span>
+                            <span class="info-value">{{ team.principal_name }}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Championships</span>
@@ -68,28 +68,9 @@
                         </div>
                         <div class="info-item">
                             <span class="info-label">First Entry</span>
-                            <span class="info-value">{{ team.first_team_entry }}</span>
+                            <span class="info-value">{{ team.first_season }}</span>
                         </div>
                     </div>
-                    <div class="team-stats">
-                        <div class="stat-item">
-                            <div class="stat-value">{{ team.total_race_wins }}</div>
-                            <div class="stat-label">Race Wins</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">{{ team.total_podiums }}</div>
-                            <div class="stat-label">Podiums</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">{{ team.pole_positions }}</div>
-                            <div class="stat-label">Pole Positions</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">{{ team.fastest_laps }}</div>
-                            <div class="stat-label">Fastest Laps</div>
-                        </div>
-                    </div>
-                    <a href="{% url 'team_detail' team.id %}" class="team-link">View Team Details</a>
                 </div>
             </div>
             {% endfor %}

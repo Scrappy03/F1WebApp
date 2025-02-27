@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Driver, DriverTeam
+from .models import Driver, DriverTeam, Team
 
 # Create your views here.
 def index(request):
