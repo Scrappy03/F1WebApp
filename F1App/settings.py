@@ -147,6 +147,10 @@ WHITENOISE_MIMETYPES = {
     '.js': 'application/javascript',
 }
 
+# Whitenoise debugging configuration
+WHITENOISE_AUTOREFRESH = True  # Refresh files during development
+WHITENOISE_USE_FINDERS = True  # Use the staticfiles finders to locate files
+
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
