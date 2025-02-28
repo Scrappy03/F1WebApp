@@ -36,9 +36,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'standings' %}">Standings</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Circuits</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -77,9 +74,10 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">Races</h2>
-                        <p class="card-text">Track race results, upcoming events, and championship standings.</p>
-                        <a href="{% url 'races' %}" class="btn btn-primary">View Races</a>
+                        <h2 class="card-title">Standings</h2>
+                        <p class="card-text">Track race results and keep up to date with the current championship
+                            standings.</p>
+                        <a href="{% url 'standings' %}" class="btn btn-primary">View Standings</a>
                     </div>
                 </div>
             </div>
