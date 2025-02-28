@@ -28,7 +28,7 @@ if 'DATABASE_URL' in os.environ:
         )
     }
 
-    MIDDLEWARE = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Right after security middleware
     'django.contrib.sessions.middleware.SessionMiddleware',
