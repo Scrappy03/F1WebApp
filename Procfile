@@ -1,1 +1,1 @@
-web: gunicorn apexdata.wsgi:application --log-file -ile -
+web: gunicorn F1App.wsgi:application --bind 0.0.0.0:$PORT
