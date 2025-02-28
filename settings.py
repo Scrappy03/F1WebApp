@@ -2,9 +2,8 @@
 import os
 import dj_database_url
 
-# SECURITY WARNING: keep the secret key used in production secret!
 # Use environment variable for Secret Key in production
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-local-dev-secret-key')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'local-dev-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
@@ -29,11 +28,15 @@ if 'DATABASE_URL' in os.environ:
         )
     }
 
-# Add whitenoise for static files
-MIDDLEWARE = [
-    # ...existing middleware...
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    # ...existing middleware...
+    MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Right after security middleware
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 # Whitenoise static file settings
