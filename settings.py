@@ -6,7 +6,8 @@ import dj_database_url
 SECRET_KEY = os.environ.get('SECRET_KEY', 'local-dev-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+# For troubleshooting, temporarily set default to True, then revert after fixing
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Allow Render's domain and localhost
 ALLOWED_HOSTS = [
@@ -16,9 +17,15 @@ ALLOWED_HOSTS = [
     'apexdata.onrender.com',
 ]
 
-# Static files (CSS, JavaScript, Images)
+# Add root URL configuration check
+ROOT_URLCONF = 'f1app.urls'  # Make sure this is correct!
+
+# Make sure static files are configured properly
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Render specific PostgreSQL database configuration
 if 'DATABASE_URL' in os.environ:
