@@ -22,8 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("apexData.urls")),
-path("accounts/", include("django.contrib.auth.urls")),
-    path("api/", include("apexData.api_urls")),
 ]
 
 # Add static and media URL patterns for development
