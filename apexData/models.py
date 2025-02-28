@@ -22,6 +22,11 @@ class Driver(models.Model):
         ('reserve', 'Reserve'),
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    wins = models.IntegerField(default=0)
+    dnfs = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-points']  # This will automatically order by points descending
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

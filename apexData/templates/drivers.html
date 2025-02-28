@@ -6,12 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Drivers - ApexData</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Static CSS -->
     <link rel="stylesheet" href="{% static 'styles/drivers.css' %}">
 </head>
 
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{% url 'index' %}">ApexData</a>
@@ -27,13 +31,20 @@
                         <a class="nav-link active" href="{% url 'drivers' %}">Drivers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Teams</a>
+                        <a class="nav-link" href="{% url 'teams' %}">Teams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'standings' %}">Standings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Circuits</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Page Title -->
     <div class="page-title-container">
         <div class="container">
             <h1 class="page-title">Formula 1 Drivers</h1>
@@ -42,8 +53,11 @@
         </div>
     </div>
 
+    <!-- Main Content -->
     <div class="container">
+        <!-- Regroup drivers by team -->
         {% regroup driver_teams by team as team_list %}
+        <!-- Loop through teams -->
         {% for team in team_list %}
         <div class="team-section mb-5">
             <!-- Add this temporarily for debugging -->
@@ -54,6 +68,7 @@
                 {{ team.grouper.team_name }}
             </h2>
             <div class="row g-4">
+                <!-- Loop through drivers in each team -->
                 {% for driver_team in team.list %}
                 <div class="col-md-6">
                     <div class="card h-100" data-team="{{ team.grouper.team_name }}">
@@ -93,12 +108,14 @@
         {% endfor %}
     </div>
 
+    <!-- Footer -->
     <footer class="bg-dark text-light py-3 mt-5">
         <div class="container text-center">
             <p class="mb-0">&copy; 2024 ApexData. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'scripts/drivers.js' %}"></script>
 </body>
