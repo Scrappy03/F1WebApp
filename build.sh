@@ -8,9 +8,21 @@ echo "=== Starting build process ==="
 echo "Installing dependencies..."
 pip install -r requirements.txt
 
-# Collect static files
+# Create necessary directories if they don't exist
+echo "Ensuring static directory exists..."
+mkdir -p static/styles
+
+# Verify CSS file location before collectstatic
+echo "=== Checking CSS file before collectstatic ==="
+find . -name "styles.css"
+
+# Collect static files with verbose output
 echo "Collecting static files..."
-python manage.py collectstatic --no-input
+python manage.py collectstatic --no-input -v 2
+
+# Verify CSS file location after collectstatic
+echo "=== Checking CSS file after collectstatic ==="
+find staticfiles -name "styles.css"
 
 # Apply database migrations
 echo "Applying database migrations..."
@@ -24,13 +36,8 @@ pip freeze
 echo "=== Django version ==="
 python -c "import django; print(django.get_version())"
 
-# Check if wsgi.py exists
-echo "=== Checking for WSGI file ==="
-if [ -f "f1app/wsgi.py" ]; then
-    echo "f1app/wsgi.py exists"
-else
-    echo "WARNING: f1app/wsgi.py does not exist. Check your project structure!"
-    find . -name "wsgi.py"
-fi
+# List all files in staticfiles directory
+echo "=== Files in staticfiles directory ==="
+find staticfiles -type f | sort
 
 echo "Build completed successfully!"
