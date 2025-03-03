@@ -22,17 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-jxuq+o2pqjz4x*-h1kq96$fob1c3&xriukb(m_xu+k2c9tuaj2')
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DEBUG', 'True') == 'False'
 
 ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1',
     '.onrender.com',
-    'apexdata.onrender.com',
-    '*',  # Temporarily to debug - remove later
+    'apexdata.onrender.com'
 ]
 
 
@@ -46,12 +45,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apexData.apps.ApexdataConfig",
-    "whitenoise.runserver_nostatic",  # Add whitenoise
+    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Add whitenoise middleware
+    "whitenoise.middleware.WhiteNoiseMiddleware", 
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -150,10 +149,6 @@ WHITENOISE_MIMETYPES = {
 # Whitenoise debugging configuration
 WHITENOISE_AUTOREFRESH = True  # Refresh files during development
 WHITENOISE_USE_FINDERS = True  # Use the staticfiles finders to locate files
-
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
